@@ -45,10 +45,10 @@ public class UseShoppingCartTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		driver = ToolBox.chooseBrowser(log, EBrowser.f);
+		driver = ToolBox.chooseBrowser(log, EBrowser.c);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver, 7000);
+		//wait = new WebDriverWait(driver, 7000);
 	}
 	
 	/**
@@ -66,12 +66,17 @@ public class UseShoppingCartTest {
 	/**
 	 * shoppingCartTest() is the method to automate Squash testing 
 	 * @author formation
+	 * @throws InterruptedException 
 	 *
 	 */
 	@Test
-	public void shoppingcartTest() {
+	public void shoppingcartTest() throws InterruptedException {
 	// PT1 : Open application on the Browser
 		driver.get("http://demo.shopizer.com:8080/shop");
+		Thread.sleep(10000);
+		driver.navigate().refresh();
+		Thread.sleep(10000);
+		
 		driver.findElement(By.xpath("//a[@class='cc-btn cc-dismiss']")).click();
 		assertTrue(driver.findElement(By.xpath("//div[contains(@class,'bannerImage')]")).isDisplayed());
 		
@@ -79,7 +84,7 @@ public class UseShoppingCartTest {
 		System.out.println("SHOPIZER IS OPEN");
 
 	// PT2 : Added object on Shopping cart
-		driver.findElement(By.xpath("//@productid[.='1200']")).click();
+		driver.findElement(By.xpath("//a[@productid='1200']")).click();
 		assertEquals(driver.findElement(By.xpath("//span[@id='miniCartSummary']")).getText(), "1");
 		
 		//log.info("INFO : SHOPIZER IS OPEN");
