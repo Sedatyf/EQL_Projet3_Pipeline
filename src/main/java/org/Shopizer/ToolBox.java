@@ -54,5 +54,15 @@ public class ToolBox {
 			return null;
 		}
 	}
+	
+	/**
+	 * fillInField() is the method of cleaning and filling text fields
+	 * @param we s
+	 * 
+	 */
+	public static void fillInField(WebElement we, String s) {
+		we.clear();
+		we.sendKeys(s);
+	}
 
 }
