@@ -69,4 +69,4 @@ else
 
 # Run SonarQube
 echo "Launching SonarQube"
-docker run --rm -d -p 9000:9000 -v sonar_conf:/opt/sonarqube/conf -v sonar_data:/opt/sonarqube/data -v sonar_logs:/opt/sonarqube/logs -v sonar_extensions:/opt/sonarqube/extensions sonarqube
+docker run --rm -d -p 9000:9000 --name sonar -v sonar_conf:/opt/sonarqube/conf -v sonar_data:/opt/sonarqube/data -v sonar_logs:/opt/sonarqube/logs -v sonar_extensions:/opt/sonarqube/extensions sonarqube
