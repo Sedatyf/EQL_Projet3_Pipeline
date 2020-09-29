@@ -17,7 +17,7 @@
 	<repositories>
 		<repository>
 			<id>maven-group</id>
-			<url>http://176.160.193.39:25889/repository/maven-group-team2/</url>
+			<url>http://176.160.193.39:25889/repository/maven-central-team2/</url>
 		</repository>
 	</repositories>
 
