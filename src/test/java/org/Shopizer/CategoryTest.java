@@ -34,9 +34,15 @@ public class CategoryTest {
 	WebDriver driver;
 	WebDriverWait wait;
 	
+	PageHome home;
+	PageTablesProducts tables;
+	
+	String URL = "http://176.160.193.39:25890/shopizer";
+	
 	/**
 	 * setUp() is the method to choose the Browser
 	 * @author formation
+	 * @throws Exception
 	 *
 	 */
 	@Before
@@ -49,6 +55,7 @@ public class CategoryTest {
 	/**
 	 * tearDown() is the method to quite the browser
 	 * @author formation
+	 * @throws Exception
 	 *
 	 */
 	@After
@@ -66,11 +73,28 @@ public class CategoryTest {
 	 */
 	@Test
 	public void tableCategoryTest() throws InterruptedException {
-		driver.get("http://176.160.193.39:25890/shopizer");
+		ToolBox.navToURL(driver, URL);
+		//PageHome instantiation
+		home = new PageHome(driver);
+		Thread.sleep(700);
+		//log.info("[INFO] : SHOPIZER IS OPEN");
+		System.out.println("[INFO] : SHOPIZER IS OPEN");
 		
-	// PT1 : Checking a dropdown menu appears, and lets categories appear
+	// PT1 : Check a dropdown menu appears, and lets categories appear (not applicable with the tested version of the application)
+	// PT1 bis : Check tables button is displayed
+		assertTrue(home.btnTablesOnProductsMenu.isDisplayed());
+		//log.info("[INFO] : TABLES BUTTON IS DISPLAYED ON THE PRODUCTS MENU");
+		System.out.println("[INFO] : TABLES BUTTON IS DISPLAYED ON THE PRODUCTS MENU");
 		
 	// PT2 : Opening the "products tables" page and checking the presence of items in this category
+		home.btnTablesOnProductsMenu.click();
+		//PageTablesProducts instantiation
+		tables = new PageTablesProducts(driver);
+		
+		assertEquals(tables.titleTables.getText(), "Table");
+		assertTrue(tables.ctnTablesProducts.isDisplayed());
+		//log.info("[INFO] : TABLE PAGE IS OPEN AND PRODUCTS ARE DISPLAYED");
+		System.out.println("[INFO] : TABLE PAGE IS OPEN AND PRODUCTS ARE DISPLAYED");
 		
 	// PT3 : Checking all elements of each product
 		

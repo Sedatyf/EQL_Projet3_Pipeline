@@ -3,15 +3,6 @@
  */
 package org.Shopizer;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +21,7 @@ import org.Shopizer.EBrowser;
  */
 public class ToolBox {
 	static long chrono = 0;
+	static WebDriver driver;
 	
 	/**
 	 * chooseBrowser() is the method of choosing browser
@@ -54,6 +46,15 @@ public class ToolBox {
 			log.warn("This web browser doesn't exist");
 			return null;
 		}
+	}
+	
+	/**
+	 * navToURL() is the method of navigating on URL
+	 * @param driver URL
+	 * 
+	 */
+	public static void navToURL(WebDriver driver, String URL) {
+		driver.get(URL);
 	}
 	
 	/**

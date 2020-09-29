@@ -9,15 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,24 +30,31 @@ public class UseShoppingCartTest {
 	WebDriver driver;
 	WebDriverWait wait;
 	
+	PageHome home;
+	PageShoppingCart shoppingCart;
+	PageCheckout checkout;
+	
+	String URL = "http://176.160.193.39:25890/shopizer";
+	String qttModified = "2";
 	
 	
 	/**
 	 * setUp() is the method to choose the Browser
 	 * @author formation
+	 * @throws Exception 
 	 *
 	 */
 	@Before
 	public void setUp() throws Exception {
-		driver = ToolBox.chooseBrowser(log, EBrowser.c);
+		driver = ToolBox.chooseBrowser(log, EBrowser.f);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//wait = new WebDriverWait(driver, 7000);
 	}
 	
 	/**
 	 * tearDown() is the method to quite the browser
 	 * @author formation
+	 * @throws Exception 
 	 *
 	 */
 	@After
@@ -71,84 +72,82 @@ public class UseShoppingCartTest {
 	 */
 	@Test
 	public void shoppingcartTest() throws InterruptedException {
-	// PT1 : Open application on the Browser
-		driver.get("http://176.160.193.39:25890/shopizer");
-		//Thread.sleep(10000);
-		//driver.navigate().refresh();
-		//Thread.sleep(10000);
+	// PT1 : Check the application is open on the Browser
+		ToolBox.navToURL(driver, URL);
+		//PageHome instantiation
+		home = new PageHome(driver);
 		
-		assertTrue(driver.findElement(By.xpath("//p[contains(., 'test text')]")).isDisplayed());
-		
-		//log.info("INFO : SHOPIZER IS OPEN");
-		System.out.println("SHOPIZER IS OPEN");
+		assertTrue(home.textAssertHome.isDisplayed());
+		//log.info("[INFO] : SHOPIZER IS OPEN");
+		System.out.println("[INFO] : SHOPIZER IS OPEN");
 
 	// PT2 : Added object on Shopping cart
-		driver.findElement(By.xpath("//a[@productid='150']")).click();
-		assertEquals(driver.findElement(By.xpath("//strong[.='(1)']")).getText(), "(1)");
+		home.btnAddToCart1stProduct.click();
 		
-		//log.info("INFO : SHOPIZER IS OPEN");
-		System.out.println("INFO : OBJECT IS ADDED ON SHOPING CART");
+		assertEquals(home.textAssertCartNumber.getText(), "(1)");
+		//log.info("[INFO] : SHOPIZER IS OPEN");
+		System.out.println("[INFO] : OBJECT IS ADDED ON SHOPING CART");
 		
 	// PT3 : Open the shopping cart overview
-		WebElement shoppingCart = driver.findElement(By.xpath("//a[contains(., 'Panier ')]"));
-		WebElement btn_paiement = driver.findElement(By.xpath("//a[contains(., 'Paiement')]"));
-		Actions act = new Actions(driver);
-		act.moveToElement(shoppingCart).build().perform();
-		Thread.sleep(5000);
-		btn_paiement.click();
+		ToolBox.moveToElement(driver, home.menuPanierToOver);
+		Thread.sleep(2000);
+		home.btnPaiementOnRollOn.click();
+		//PageShoppingCart instantiation
+		shoppingCart = new PageShoppingCart(driver);
 		
+		assertEquals(shoppingCart.titleCartPage.getText(), "Revoir votre commande");
+		//log.info("[INFO] : SHOPING CART IS OPEN");
+		System.out.println("[INFO] : SHOPING CART IS OPEN");
 		
-		//driver.findElement(By.xpath("//a[contains(., 'Paiement')]")).click();
-		assertEquals(driver.findElement(By.xpath("//h1")).getText(), "Revoir votre commande");
-		//log.info("INFO : SHOPING CART IS OPEN");
-		System.out.println("INFO : SHOPING CART IS OPEN");
+	// PT4 : Check objects are displayed
+		//Check image 
+		assertTrue(shoppingCart.imgTableProductInCart.isDisplayed());
+		//Check name
+		assertTrue(shoppingCart.nameTableProductInCart.isDisplayed());
+		//Check quantity
+		assertTrue(shoppingCart.quantityTableProductInCart.isDisplayed());
+		//Check unit price
+		assertTrue(shoppingCart.unitPriceTableProductInCart.isDisplayed());
+		//Check total
+		assertTrue(shoppingCart.totalPriceTableProductInCart.isDisplayed());
 		
-	// PT4 : Verify if object is displayed
-		// Image verification
-		assertTrue(driver.findElement(By.xpath("//div[@class='col-sm-4 hidden-xs']/img")).isDisplayed());
-		// Name verification
-		assertTrue(driver.findElement(By.xpath("//strong[contains(., 'Thai flat cussion')]")).isDisplayed());
-		// Quantity verification
-		assertTrue(driver.findElement(By.name("quantity")).isDisplayed());
-		// Price verification
-		assertTrue(driver.findElement(By.xpath("//td[@data-th='Prix']/strong[contains(., 'US$59.99')]")).isDisplayed());
-		// Total verification
-		assertTrue(driver.findElement(By.xpath("//td[@data-th='Total']/strong[contains(., 'US$59.99')]")).isDisplayed());
+		//log.info("[INFO] : ELEMENTS ARE DISPLAYED ON SHOPPING CART");
+		System.out.println("[INFO] : ELEMENTS ARE DISPLAYED ON SHOPPING CART");
 		
-		//log.info("INFO : ELEMENTS ARE DISPLAYED ON SHOPPING CART");
-		System.out.println("ELEMENTS ARE DISPLAYED ON SHOPPING CART");
+	// PT5 : Check quantity is update
+		//Modify the quantity
+		ToolBox.fillInField(shoppingCart.quantityTableProductInCart, qttModified);
+		shoppingCart.btnRecalculerTableProductInCart.click();
+		Thread.sleep(700);
 		
-	// PT5 : Update quantity on shopping cart
-		//doubler la quantité du produit
-		driver.findElement(By.name("quantity")).clear();
-		driver.findElement(By.name("quantity")).sendKeys("2");
-		driver.findElement(By.xpath("//a[contains(., 'Recalculer')]")).click();
-		assertTrue(driver.findElement(By.xpath("//input[@value='2']")).isDisplayed());
+		assertEquals(shoppingCart.quantityTableProductInCart.getAttribute("value"), qttModified);
+		//log.info("[INFO] : QUANTITY IS UPDATED");
+		System.out.println("[INFO] : QUANTITY IS UPDATED");
 		
-		//log.info("INFO : QUANTITY IS UPDATED");
-		System.out.println("QUANTITY IS UPDATED");
+	// PT6 : Check total is updated
+		//Recover value without currency
+		String unitPriceValue = shoppingCart.unitPriceTableProductInCart.getText().substring(3);
+		String subtotalValue = shoppingCart.subTotalValueInCart.getText().substring(3);
+		String totalValue = shoppingCart.totalPriceTableProductInCart.getText().substring(3);
+		//Convert recovered string to double for assert
+		double unitPrice = Double.parseDouble(unitPriceValue);
+		double Subtotal = Double.parseDouble(subtotalValue);
+		double Total = Double.parseDouble(totalValue);
 		
-	// PT6 : Verify total updated
-		String unitPrice = driver.findElement(By.xpath("//strong[contains(.,'59.99')]")).getText().substring(3);
-		String subtotal = driver.findElement(By.xpath("//tr[@class='cart-subtotal'][1]/td/span")).getText().substring(3);
-		String total = driver.findElement(By.xpath("//tr[@class='cart-subtotal'][2]/td/span")).getText().substring(3);
+		assertTrue(Subtotal == unitPrice*2);
+		assertTrue(Total == Subtotal);
+		//log.info("[INFO] : SUBTOTAL AND TOTAL PRICE ARE UPDATED");
+		System.out.println("[INFO] : SUBTOTAL AND TOTAL PRICE ARE UPDATED");
 		
-		double unit = Double.parseDouble(unitPrice);
-		double dSubtotal = Double.parseDouble(subtotal);
-		double dTotal = Double.parseDouble(total);
+	// PT7 : Check checkout page is open
+		shoppingCart.btnProceedCheckout.click();
+		//PageCheckout instantiation
+		checkout = new PageCheckout(driver);
+		Thread.sleep(200);
 		
-		assertTrue(dSubtotal == unit*2);
-		assertTrue(dTotal == dSubtotal);
-		
-		//log.info("INFO : SUBTOTAL AND TOTAL PRICE AR UPDATED");
-		System.out.println("SUBTOTAL AND TOTAL PRICE AR UPDATED");
-		
-	// PT7 : Verify checkout page is open
-		driver.findElement(By.xpath("//a[contains (., 'Effectuer le paiement')]")).click();
-		assertEquals(driver.findElement(By.xpath("//h1")).getText(), "Paiement");
-		
-		//log.info("INFO : CHECKOUT PAGE IS OPEN");
-		System.out.println("CHECKOUT PAGE IS OPEN");
+		assertEquals(checkout.titleCheckout.getText(), "Paiement");
+		//log.info("[INFO] : CHECKOUT PAGE IS OPEN");
+		System.out.println("INFO] : CHECKOUT PAGE IS OPEN");
 	}
 	
 
