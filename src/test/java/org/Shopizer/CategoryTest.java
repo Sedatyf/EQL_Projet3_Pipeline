@@ -66,10 +66,7 @@ public class CategoryTest {
 	 */
 	@Test
 	public void tableCategoryTest() throws InterruptedException {
-		driver.get("http://demo.shopizer.com:8080/shop");
-		Thread.sleep(10000);
-		driver.navigate().refresh();
-		Thread.sleep(10000);
+		driver.get("http://176.160.193.39:25890/shopizer");
 		
 	// PT1 : Checking a dropdown menu appears, and lets categories appear
 		

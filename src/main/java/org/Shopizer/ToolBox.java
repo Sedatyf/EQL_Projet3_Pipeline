@@ -18,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 
 import org.Shopizer.EBrowser;
@@ -63,6 +64,11 @@ public class ToolBox {
 	public static void fillInField(WebElement we, String s) {
 		we.clear();
 		we.sendKeys(s);
+	}
+	
+	public static void moveToElement(WebDriver driver, WebElement we) {
+		Actions act = new Actions(driver);
+		act.moveToElement(we).build().perform();
 	}
 
 }
