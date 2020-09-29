@@ -13,7 +13,7 @@ IS_SONAR_LOGS=$(grep 'sonar_logs' /home/debian/scriptLogs/volume_output)
 docker rm $(docker ps -aq)
 
 # if IS_JENKINS_DATA is empty then create volume
-if [-z "$IS_JENKINS_DATA"]
+if [ -z "$IS_JENKINS_DATA" ]
 then
     echo "[!] No Jenkins volume detected"
     docker volume create jenkins_data
@@ -26,7 +26,7 @@ echo "Launching Jenkins"
 docker run -d -p 8095:8080 -v jenkins_data:/var/jenkins_home --name jenkins jenkins/jenkins
 
 # if IS_NEXUS_DATA is empty then create volume
-if [-z "$IS_NEXUS_DATA"]
+if [ -z "$IS_NEXUS_DATA" ]
 then
     echo "[!] No Nexus volume detected"
     docker volume create nexus_data
@@ -39,7 +39,7 @@ echo "Launching Nexus"
 docker run -d -p 8081:8081 --name nexus -v nexus_data:/nexus-data sonatype/nexus3
 
 # if IS_SONAR_DATA is empty then create volume
-if [-z "$IS_SONAR_DATA"]
+if [ -z "$IS_SONAR_DATA" ]
 then
     echo "[!] No Sonar Data volume detected"
     docker volume create sonar_data
@@ -47,7 +47,7 @@ else
     echo "[*] Sonar Data volume detected, moving on"
 fi
 
-if [-z "$IS_SONAR_CONF"]
+if [ -z "$IS_SONAR_CONF" ]
 then
     echo "[!] No Sonar Conf volume detected"
     docker volume create sonar_conf
@@ -55,7 +55,7 @@ else
     echo "[*] Sonar Conf volume detected, moving on"
 fi
 
-if [-z "$IS_SONAR_EXT"]
+if [ -z "$IS_SONAR_EXT" ]
 then
     echo "[!] No Sonar Extension volume detected"
     docker volume create sonar_extensions
@@ -63,7 +63,7 @@ else
     echo "[*] Sonar Extension volume detected, moving on"
 fi
 
-if [-z "$IS_SONAR_LOGS"]
+if [ -z "$IS_SONAR_LOGS" ]
 then
     echo "[!] No Sonar Logs volume detected"
     docker volume create sonar_logs
