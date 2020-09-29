@@ -22,7 +22,7 @@ else
 fi
 
 # Run Jenkins
-echo "Launching Jenkins"
+echo "[*] Launching Jenkins"
 docker run -d -p 8095:8080 -v jenkins_data:/var/jenkins_home --name jenkins jenkins/jenkins
 
 # if IS_NEXUS_DATA is empty then create volume
@@ -35,7 +35,7 @@ else
 fi
 
 # Run Nexus
-echo "Launching Nexus"
+echo "[*] Launching Nexus"
 docker run -d -p 8081:8081 --name nexus -v nexus_data:/nexus-data sonatype/nexus3
 
 # if IS_SONAR_DATA is empty then create volume
@@ -71,5 +71,5 @@ else
     echo "[*] Sonar Logs detected, moving on"
 
 # Run SonarQube
-echo "Launching SonarQube"
+echo "[*] Launching SonarQube"
 docker run --rm -d -p 9000:9000 --name sonar -v sonar_conf:/opt/sonarqube/conf -v sonar_data:/opt/sonarqube/data -v sonar_logs:/opt/sonarqube/logs -v sonar_extensions:/opt/sonarqube/extensions sonarqube
