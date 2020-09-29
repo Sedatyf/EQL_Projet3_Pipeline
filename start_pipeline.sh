@@ -9,6 +9,9 @@ IS_SONAR_CONF=$(grep 'sonar_conf' /home/debian/scriptLogs/volume_output)
 IS_SONAR_EXT=$(grep 'sonar_extensions' /home/debian/scriptLogs/volume_output)
 IS_SONAR_LOGS=$(grep 'sonar_logs' /home/debian/scriptLogs/volume_output)
 
+# Delete all stopped container
+docker rm $(docker ps -aq)
+
 # if IS_JENKINS_DATA is empty then create volume
 if [-z "$IS_JENKINS_DATA"]
 then
