@@ -78,7 +78,7 @@
 		<!-- sonar jacoco -->
 		<!--sonar.coverage.jacoco.xmlReportPaths>/target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths -->
 		<sonar.host.url>http://176.160.193.39:25891</sonar.host.url>
-		<aggregate.report.dir>target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
+		<aggregate.report.dir>target/site/jacoco/jacoco.xml</aggregate.report.dir>
 	</properties>
 
 	<dependencies>
