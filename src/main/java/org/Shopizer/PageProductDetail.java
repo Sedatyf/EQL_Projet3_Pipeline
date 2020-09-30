@@ -16,9 +16,22 @@ import org.openqa.selenium.support.PageFactory;
 public class PageProductDetail {
 	WebDriver driver;
 	
-	//Title "h3" tables page
+	//Title "h3" into item page
 	@FindBy(xpath="//h3")
-	WebElement titleProduct;
+	WebElement titleItem;
+	
+	//Unit price into item page
+	@FindBy(xpath="//span[@itemprop='price']")
+	WebElement unitPriceItem;
+	
+	//Button "Ajouter au panier" into item page
+	@FindBy(xpath="//button[@productid]")
+	WebElement btnAddToCartItem;
+	
+	//Image stars into item page
+	@FindBy(xpath="//img[@alt='5']")
+	WebElement imgStarsItem;
+	
 	
 	/**
 	 * PageProductDetail() is the super constructor of this class

@@ -39,6 +39,9 @@ public class CategoryTest {
 	PageProductDetail productDetail;
 	
 	String URL = "http://176.160.193.39:25890/shopizer";
+	String nameFirstItemOnTablesPage;
+	String unitPriceFirstItemOnTablesPage;
+	String btnAddToCartFirstItemOnTablesPage;
 	
 	/**
 	 * setUp() is the method to choose the Browser
@@ -99,27 +102,39 @@ public class CategoryTest {
 		System.out.println("[INFO] : TABLE PAGE IS OPEN AND PRODUCTS ARE DISPLAYED");
 		
 	// PT3 : Checking all elements of each product
+		//Recovery elements on first item into PageTablesProducts before switch at PageProductDetail
+		String nameFirstItemOnTablesPage = tables.nameFirstItemOnPage.getText();
+		String unitPriceFirstItemOnTablesPage = tables.unitPriceFirstItemOnPage.getText();
+		String btnAddToCartFirstItemOnTablesPage = tables.btnAddToCarFirstItemOnPage.toString();
+		//tables.recoveryElements(driver);
+		//assertEquals(tables.imageItem.get("item1"), tables.imgFirstItemOnPage.getText());
 		
 		
 	// PT4 : Applying the filter and reducing the number of items on the page. Check that the articles present were already present on the initial page.
 		tables.filterAsianWood.click();
 		
+		driver.navigate().refresh();
+		Thread.sleep(700);
 		
 	// PT5 : Checking a product detail page	is open
 		//PageProductDetail instantiation
 		productDetail = new PageProductDetail(driver);
 		Thread.sleep(700);
 		
-		assertTrue(productDetail.titleProduct.isDisplayed());
+		assertTrue(productDetail.titleItem.isDisplayed());
 		//log.info("[INFO] : PRODUCT DETAIL PAGE IS OPEN");
 		System.out.println("[INFO] : PRODUCT DETAIL PAGE IS OPEN");
 		
 	// PT6 : Checking the presence of all these elements. These elements are the same as those on the previous page.
+		//Some elements are missing in this version of the application. The matching tests with the "Tables" page will focus on the name of the item, its price and the button "Add to cart".
+		assertEquals(productDetail.titleItem.getText(), nameFirstItemOnTablesPage);
+		//assertEquals(productDetail.btnAddToCartItem, btnAddToCartFirstItemOnTablesPage);
+		assertEquals(productDetail.unitPriceItem.getText(), unitPriceFirstItemOnTablesPage);
+		//assertTrue(productDetail.imgStarsItem.isDisplayed());
 		
-		
-		
-		
-		
+		String device = productDetail.unitPriceItem.getText().substring(0, 3);
+		System.out.println(device);
+		assertEquals(device, "US$");
 		
 		
 		

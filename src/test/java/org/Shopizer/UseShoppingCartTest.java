@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.Shopizer.EBrowser;
 import org.Shopizer.ToolBox;
 
-//import org.Shopizer.Connexion;
 
 /**
  * UseShoppingCartTest is the class to test the use of the shopping cart

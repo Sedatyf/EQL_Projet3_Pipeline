@@ -71,5 +71,10 @@ public class ToolBox {
 		Actions act = new Actions(driver);
 		act.moveToElement(we).build().perform();
 	}
+	
+//	public static void recoveryElements(WebDriver driver) {
+//		
+//		
+//	}
 
 }
