@@ -18,6 +18,14 @@
 		<version>1.5.20.RELEASE</version>
 	</parent>
 	
+<modules>
+    <module>sm-core</module>
+    <module>sm-core-model</module>
+    <module>sm-core-modules</module>
+    <module>sm-shop</module>
+    <module>sm-shop-model</module>
+ </modules>
+	
 	<profiles>
 	 <profile>
  		<id>coverage</id>
@@ -76,8 +84,9 @@
 		<!-- api documentation -->
 		<swagger.version>2.9.2</swagger.version>
 		<!-- sonar jacoco -->
-		<sonar.coverage.jacoco.xmlReportPaths>/target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<!--sonar.coverage.jacoco.xmlReportPaths>/target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths -->
 		<sonar.host.url>http://176.160.193.39:25891</sonar.host.url>
+		<aggregate.report.dir>target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 	</properties>
 
 	<dependencies>
