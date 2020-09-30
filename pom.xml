@@ -17,7 +17,32 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.20.RELEASE</version>
 	</parent>
-
+	
+	 <profile>
+ 		<id>coverage</id>
+ 			<build>
+  				<plugins>
+   				 	<plugin>
+    					<groupId>org.jacoco</groupId>
+   					<artifactId>jacoco-maven-plugin</artifactId>
+   					 <executions>
+      						<execution>
+        					 <id>prepare-agent</id>
+       						 <goals>
+         					    <goal>prepare-agent</goal>
+        					 </goals>
+      						</execution>
+      						<execution>
+        					 <id>report</id>
+        					 <goals>
+        					 <goal>report</goal>
+       						  </goals>
+      						</execution>
+    					 </executions>
+    					</plugin>
+   				</plugins>
+ 			 </build>
+		</profile>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -48,6 +73,8 @@
 		<coverage.branches>.37</coverage.branches>
 		<!-- api documentation -->
 		<swagger.version>2.9.2</swagger.version>
+		<!-- sonar jacoco -->
+		<sonar.coverage.jacoco.xmlReportPaths>/target/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<dependencies>
