@@ -18,14 +18,6 @@
 		<version>1.5.20.RELEASE</version>
 	</parent>
 	
-<modules>
-    <module>sm-core</module>
-    <module>sm-core-model</module>
-    <module>sm-core-modules</module>
-    <module>sm-shop</module>
-    <module>sm-shop-model</module>
- </modules>
-	
 	<profiles>
 	 <profile>
  		<id>coverage</id>
