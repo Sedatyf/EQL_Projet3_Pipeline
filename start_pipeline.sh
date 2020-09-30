@@ -23,7 +23,7 @@ fi
 
 # Run Jenkins
 echo "[*] Launching Jenkins"
-docker run -d -p 8095:8080 -v jenkins_data:/var/jenkins_home --name jenkins jenkins/jenkins
+docker run -d -p 8095:8080 -p 50000:50000 -v jenkins_data:/var/jenkins_home --name jenkins jenkins/jenkins
 
 # if IS_NEXUS_DATA is empty then create volume
 if [ -z "$IS_NEXUS_DATA" ]
