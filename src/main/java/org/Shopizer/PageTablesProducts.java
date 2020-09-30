@@ -17,7 +17,7 @@ public class PageTablesProducts {
 	WebDriver driver;
 	
 	//Title "h1" tables page
-	@FindBy(xpath="//h1")
+	@FindBy(xpath="//h2")
 	WebElement titleTables;
 	
 	//Container tables products on page

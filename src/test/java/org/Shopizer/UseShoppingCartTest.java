@@ -118,7 +118,7 @@ public class UseShoppingCartTest {
 		//Modify the quantity
 		ToolBox.fillInField(shoppingCart.quantityTableProductInCart, qttModified);
 		shoppingCart.btnRecalculerTableProductInCart.click();
-		Thread.sleep(700);
+		Thread.sleep(1000);
 		
 		assertEquals(shoppingCart.quantityTableProductInCart.getAttribute("value"), qttModified);
 		//log.info("[INFO] : QUANTITY IS UPDATED");

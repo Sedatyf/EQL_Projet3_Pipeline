@@ -90,8 +90,9 @@ public class CategoryTest {
 		home.btnTablesOnProductsMenu.click();
 		//PageTablesProducts instantiation
 		tables = new PageTablesProducts(driver);
+		Thread.sleep(700);
 		
-		assertEquals(tables.titleTables.getText(), "Table");
+		assertEquals(tables.titleTables.getText(), "Tables");
 		assertTrue(tables.ctnTablesProducts.isDisplayed());
 		//log.info("[INFO] : TABLE PAGE IS OPEN AND PRODUCTS ARE DISPLAYED");
 		System.out.println("[INFO] : TABLE PAGE IS OPEN AND PRODUCTS ARE DISPLAYED");

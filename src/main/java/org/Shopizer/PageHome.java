@@ -37,8 +37,8 @@ public class PageHome {
 	@FindBy(xpath="//a[contains(., 'Paiement')]")
 	WebElement btnPaiementOnRollOn;
 	
-	//Button "Tables" on products menu -> A remplir
-	@FindBy()
+	//Button "Tables" on products menu
+	@FindBy(xpath="//div[@class='mainmenu hidden-xs']/nav/ul/li[2]")
 	WebElement btnTablesOnProductsMenu;
 
 
