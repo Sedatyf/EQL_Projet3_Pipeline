@@ -16,13 +16,25 @@ import org.openqa.selenium.support.PageFactory;
 public class PageTablesProducts {
 	WebDriver driver;
 	
-	//Title "h1" tables page
+	//Title "h2" tables page
 	@FindBy(xpath="//h2")
 	WebElement titleTables;
 	
-	//Container tables products on page
+	//Container products into tables page
 	@FindBy(id="productsContainer")
 	WebElement ctnTablesProducts;
+	
+	//Items products into container tables page
+	@FindBy(xpath="//div[@id='productsContainer']/div")
+	WebElement itemsOnContainerProducts;
+	
+	//Item name "Coffee table Accacia" on filter "Asian Wood"
+	@FindBy(xpath="//div[@id='productsContainer']//a[@href]/h3")
+	WebElement itemNameAccaciaOnFilterAsianWood;
+	
+	//Filter "Asian Wood" into tables page
+	@FindBy(xpath="//a[contains(.,'Asian Wood')]")
+	WebElement filterAsianWood;
 	
 	/**
 	 * PageTablesProducts() is the super constructor of this class

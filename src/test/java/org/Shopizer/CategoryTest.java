@@ -36,6 +36,7 @@ public class CategoryTest {
 	
 	PageHome home;
 	PageTablesProducts tables;
+	PageProductDetail productDetail;
 	
 	String URL = "http://176.160.193.39:25890/shopizer";
 	
@@ -99,9 +100,19 @@ public class CategoryTest {
 		
 	// PT3 : Checking all elements of each product
 		
+		
 	// PT4 : Applying the filter and reducing the number of items on the page. Check that the articles present were already present on the initial page.
+		tables.filterAsianWood.click();
+		
 		
 	// PT5 : Checking a product detail page	is open
+		//PageProductDetail instantiation
+		productDetail = new PageProductDetail(driver);
+		Thread.sleep(700);
+		
+		assertTrue(productDetail.titleProduct.isDisplayed());
+		//log.info("[INFO] : PRODUCT DETAIL PAGE IS OPEN");
+		System.out.println("[INFO] : PRODUCT DETAIL PAGE IS OPEN");
 		
 	// PT6 : Checking the presence of all these elements. These elements are the same as those on the previous page.
 		
