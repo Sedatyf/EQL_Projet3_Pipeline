@@ -262,12 +262,12 @@
 		</pluginRepository>
 	</pluginRepositories>
 	
-<distributionManagement>
+<!--<distributionManagement>
    <snapshotRepository>
       <id>maven-snapshots-team2</id>
       <url>http://176.160.193.39:25889/repository/maven-snapshots-team2/</url>
    </snapshotRepository>
-</distributionManagement>
+</distributionManagement>-->
 
 	<build>
 		<plugins>
