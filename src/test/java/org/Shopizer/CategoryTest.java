@@ -5,19 +5,14 @@ package org.Shopizer;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
 //import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,9 +100,9 @@ public class CategoryTest {
 		
 	// PT3 : Checking all elements of each product
 		//Recovery elements on first item into PageTablesProducts before switch at PageProductDetail
-		String nameFirstItemOnTablesPage = tables.nameFirstItemOnPage.getText();
+		String nameFirstItemOnTablesPage = tables.nameFirstItemOnPage.getText().toLowerCase();
 		String unitPriceFirstItemOnTablesPage = tables.unitPriceFirstItemOnPage.getText();
-		//String btnAddToCartFirstItemOnTablesPage = tables.btnAddToCarFirstItemOnPage.getText();
+		String btnAddToCartFirstItemOnTablesPage = tables.btnAddToCarFirstItemOnPage.getText();
 		
 		//Check first item elements are displayed
 		assertTrue(tables.imgFirstItemOnPage.isDisplayed());
@@ -158,6 +153,7 @@ public class CategoryTest {
 		
 
 	// PT5 : Checking a product detail page	is open
+		tables.nameFirstItemOnPage.click();
 		//PageProductDetail instantiation
 		productDetail = new PageProductDetail(driver);
 		Thread.sleep(700);
@@ -169,15 +165,18 @@ public class CategoryTest {
 		
 	// PT6 : Checking the presence of all these elements. These elements are the same as those on the previous page.	
 		//Some elements are missing in this version of the application. The matching tests with the "Tables" page will focus on the name of the item, its price and the button "Add to cart".
-		assertEquals(productDetail.titleItem.getText(), nameFirstItemOnTablesPage);
-		//System.out.println(productDetail.btnAddToCartItem.getText());
-		//assertEquals(productDetail.btnAddToCartItem.getText(), btnAddToCartFirstItemOnTablesPage);
+		String titleItemProductDetail = productDetail.titleItem.getText().toLowerCase();
+		assertEquals(titleItemProductDetail, nameFirstItemOnTablesPage);
+		
+		System.out.println(productDetail.btnAddToCartItem.getText());
+		assertEquals(productDetail.btnAddToCartItem.getText(), btnAddToCartFirstItemOnTablesPage);
 		assertEquals(productDetail.unitPriceItem.getText(), unitPriceFirstItemOnTablesPage);
 		//log.info("[INFO] : NAME, PRICE AND BUTTON 'ADD TO CART' ARE DISPLAYED");
 		System.out.println("[INFO] : STARS AND DEVICE ARE DISPLAYED");
 		
+		//Check the presence of rating and device price item
 		System.out.println(productDetail.ratingItem);
-		//assertTrue(productDetail.ratingItem.isDisplayed());
+		assertTrue(productDetail.ratingItem.isDisplayed());
 		String device = productDetail.unitPriceItem.getText().substring(0, 3);
 		assertEquals(device, "US$");	
 		//log.info("[INFO] : STARS AND DEVICE ARE DISPLAYED");
