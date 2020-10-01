@@ -32,26 +32,58 @@ public class PageTablesProducts {
 	@FindBy(xpath="//div[@id='productsContainer']/div")
 	WebElement itemsOnContainerProducts;
 	
-	//First item into container tables page
-	@FindBy(xpath="//div[@id='productsContainer']/div[1]")
-	WebElement itemFirstOnPage;
-	
 	//First item image
 	@FindBy(xpath="//div[@id='productsContainer']/div[1]/div[1]")
 	WebElement imgFirstItemOnPage;
-	
 	//First item name
 	@FindBy(xpath="//div[@id='productsContainer']/div[1]//h3")
 	WebElement nameFirstItemOnPage;
-	
 	//First item unit price with device
 	@FindBy(xpath="//div[@id='productsContainer']/div[1]//span")
 	WebElement unitPriceFirstItemOnPage;
-	
 	//First item button "Ajouter au panier"
-	@FindBy(xpath="//div[@id='productsContainer']/div[1]///a[@class='addToCart']")
+	@FindBy(xpath="//div[@id='productsContainer']/div[1]//a[@class='addToCart']")
 	WebElement btnAddToCarFirstItemOnPage;
 	
+	//Second item image
+	@FindBy(xpath="//div[@id='productsContainer']/div[2]/div[1]")
+	WebElement imgSdItemOnPage;
+	//Second item name
+	@FindBy(xpath="//div[@id='productsContainer']/div[2]//h3")
+	WebElement nameSdItemOnPage;
+	//Second item unit price with device
+	@FindBy(xpath="//div[@id='productsContainer']/div[2]//span")
+	WebElement unitPriceSdItemOnPage;
+	//Second item button "Ajouter au panier"
+	@FindBy(xpath="//div[@id='productsContainer']/div[2]//a[@class='addToCart']")
+	WebElement btnAddToCarSdItemOnPage;
+	
+	//Third item image
+	@FindBy(xpath="//div[@id='productsContainer']/div[3]/div[1]")
+	WebElement imgThirdItemOnPage;
+	//Third item name
+	@FindBy(xpath="//div[@id='productsContainer']/div[3]//h3")
+	WebElement nameThirdItemOnPage;
+	//Third item unit price with device
+	@FindBy(xpath="//div[@id='productsContainer']/div[3]//span")
+	WebElement unitPriceThirdItemOnPage;
+	//Second item button "Ajouter au panier"
+	@FindBy(xpath="//div[@id='productsContainer']/div[3]//a[@class='addToCart']")
+	WebElement btnAddToCarThirdItemOnPage;
+	
+	//Fourth item image
+	@FindBy(xpath="//div[@id='productsContainer']/div[4]/div[1]")
+	WebElement imgFourthItemOnPage;
+	//Fourth item name
+	@FindBy(xpath="//div[@id='productsContainer']/div[4]//h3")
+	WebElement nameFourthItemOnPage;
+	//Fourth item unit price with device
+	@FindBy(xpath="//div[@id='productsContainer']/div[4]//span")
+	WebElement unitPriceFourthItemOnPage;
+	//Fourth item button "Ajouter au panier"
+	@FindBy(xpath="//div[@id='productsContainer']/div[4]//a[@class='addToCart']")
+	WebElement btnAddToCarFourthItemOnPage;
+
 	//Item name "Coffee table Accacia" on filter "Asian Wood"
 	@FindBy(xpath="//div[@id='productsContainer']//a[@href]/h3")
 	WebElement nameItemAccaciaOnFilterAsianWood;
@@ -61,11 +93,7 @@ public class PageTablesProducts {
 	WebElement filterAsianWood;
 	
 	
-	Map<String, String> imageItem = new HashMap<String, String>();
-	Map<String, String> nameItem = new HashMap<String, String>();
-	Map<String, String> unitPriceItem = new HashMap<String, String>();
-	Map<String, String> btnAddToCartItem = new HashMap<String, String>();
-
+	
 	
 	/**
 	 * PageTablesProducts() is the super constructor of this class
@@ -79,14 +107,4 @@ public class PageTablesProducts {
 		PageFactory.initElements(driver, this);	
 	}
 	
-	public void recoveryElements(WebDriver driver) {		
-		for(int i=1; i<=4; i++) {
-			imageItem.put("item"+i, driver.findElement(By.xpath("//div[@id='productsContainer']/div["+i+"]/div[1]")).getText());
-			nameItem.put("item"+i, driver.findElement(By.xpath("//div[@id='productsContainer']/div["+i+"]//h3")).getText());
-			unitPriceItem.put("item"+i, driver.findElement(By.xpath("//div[@id='productsContainer']/div["+i+"]//span")).getText());
-			btnAddToCartItem.put("item"+i, driver.findElement(By.xpath("//div[@id='productsContainer']/div["+i+"]///a[@class='addToCart']")).getText());
-		}
-	}
-	
-
 }

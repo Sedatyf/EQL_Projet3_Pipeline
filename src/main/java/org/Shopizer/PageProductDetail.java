@@ -25,13 +25,16 @@ public class PageProductDetail {
 	WebElement unitPriceItem;
 	
 	//Button "Ajouter au panier" into item page
-	@FindBy(xpath="//button[@productid]")
+	@FindBy(xpath="//button[.='Ajouter au panier']")
 	WebElement btnAddToCartItem;
 	
 	//Image stars into item page
-	@FindBy(xpath="//img[@alt='5']")
+	@FindBy(xpath="//img[@alt='5'][contains(@src, 'img/stars/star-off.png')]")
 	WebElement imgStarsItem;
 	
+	//Rating item into item page
+	@FindBy(id="productRating")
+	WebElement ratingItem;
 	
 	/**
 	 * PageProductDetail() is the super constructor of this class
