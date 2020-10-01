@@ -167,15 +167,12 @@ public class CategoryTest {
 		//Some elements are missing in this version of the application. The matching tests with the "Tables" page will focus on the name of the item, its price and the button "Add to cart".
 		String titleItemProductDetail = productDetail.titleItem.getText().toLowerCase();
 		assertEquals(titleItemProductDetail, nameFirstItemOnTablesPage);
-		
-		System.out.println(productDetail.btnAddToCartItem.getText());
 		assertEquals(productDetail.btnAddToCartItem.getText(), btnAddToCartFirstItemOnTablesPage);
 		assertEquals(productDetail.unitPriceItem.getText(), unitPriceFirstItemOnTablesPage);
 		//log.info("[INFO] : NAME, PRICE AND BUTTON 'ADD TO CART' ARE DISPLAYED");
 		System.out.println("[INFO] : STARS AND DEVICE ARE DISPLAYED");
 		
 		//Check the presence of rating and device price item
-		System.out.println(productDetail.ratingItem);
 		assertTrue(productDetail.ratingItem.isDisplayed());
 		String device = productDetail.unitPriceItem.getText().substring(0, 3);
 		assertEquals(device, "US$");	
