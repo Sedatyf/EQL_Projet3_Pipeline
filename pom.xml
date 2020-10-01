@@ -261,6 +261,13 @@
 			<url>https://repo.spring.io/libs-release</url>
 		</pluginRepository>
 	</pluginRepositories>
+	
+<distributionManagement>
+   <snapshotRepository>
+      <id>maven-snapshots-team2</id>
+      <url>http://176.160.193.39:25889/repository/maven-snapshots-team2/</url>
+   </snapshotRepository>
+</distributionManagement>
 
 	<build>
 		<plugins>
@@ -328,6 +335,38 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+  			  <groupId>org.apache.maven.plugins</groupId>
+  			  <artifactId>maven-deploy-plugin</artifactId>
+  			  <version>${maven-deploy-plugin.version}</version>
+  			  <configuration>
+      			    <skip>true</skip>
+   			  </configuration>
+			</plugin>
+			
+			
+			<plugin>
+  			  <groupId>org.sonatype.plugins</groupId>
+   			  <artifactId>nexus-staging-maven-plugin</artifactId>
+   			  <version>1.5.1</version>
+  			    <executions>
+                              <execution>
+        			 <id>default-deploy</id>
+        			 <phase>deploy</phase>
+        			 <goals>
+           			    <goal>deploy</goal>
+        			 </goals>
+      			      </execution>
+   			    </executions>
+  			    <configuration>
+      				<serverId>nexus</serverId>
+     				<nexusUrl>http://176.160.193.39:25889</nexusUrl>
+      				<skipStaging>true</skipStaging>
+  			    </configuration>
+			</plugin>
+			
+			
 		</plugins>
 	</build>
 
